@@ -1,30 +1,33 @@
-import React, { Component } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {Dropdown} from 'react-bootstrap';
 import {Link} from "react-router-dom";
+import './nav.css';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 class NavBar extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            username: "test"
+            email: cookies.get("email")
         }
     }
-    render () {
+
+    render() {
         return (
             <div>
                 <nav className="navbar navbar-dark bg-dark mb-3 ">
-                    <Link className="navbar-brand"to="/">Home</Link>
+                    <Link className="navbar-brand" to="/">Home</Link>
                     <Link className="navbar-brand" to="/about">About</Link>
-                    <b className="navbar-brand">ClassBot</b>
+                    <img src="/logo50.png" alt="ClassBot" className="navbar-item"/>
                     <Link className="navbar-brand" to="/account">My Account</Link>
                     <Dropdown>
-                            <Dropdown.Toggle variant="Secondary" id="dropdown-basic" className="navbar-brand">
-                            {this.state.username}
+                        <Dropdown.Toggle variant="Secondary" id="dropdown-menu" className="navbar-brand">
+                            {this.state.email}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            <Dropdown.Item><Link to="/account" className="dropdown-item">My Account</Link></Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </nav>
@@ -32,4 +35,5 @@ class NavBar extends Component {
         )
     }
 }
+
 export default NavBar;
