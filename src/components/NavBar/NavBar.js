@@ -4,12 +4,13 @@ import {Link} from "react-router-dom";
 import './nav.css';
 import Cookies from 'universal-cookie';
 
-const cookies = new Cookies();
 class NavBar extends Component {
     constructor(props) {
         super(props);
+        this.cookies = new Cookies();
+
         this.state = {
-            email: cookies.get("email")
+            email: this.cookies.get("email")
         }
     }
 
@@ -27,7 +28,8 @@ class NavBar extends Component {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item><Link to="/account" className="dropdown-item">My Account</Link></Dropdown.Item>
+                            <Dropdown.Item><Link to="/account" className="dropdown-item">My
+                                Account</Link></Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </nav>

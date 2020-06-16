@@ -9,15 +9,25 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.props = props;
-        this.state = {}
+        this.state = {
+            email: '',
+            password: '',
+        }
 
     }
 
-    handleSubmit(e) {
-        cookies.set("email", e.target.email)
-        cookies.set("email", e.target.password)
-        this.props.history.push("/")
+    handleEmailChange(e) {
+        this.setState({email: e.target.value})
+    };
 
+    handlePasswordChange(e) {
+        this.setState({password: e.target.value})
+    }
+
+    handleSubmit(e) {
+        cookies.set("email", this.state.email)
+        cookies.set("password", this.state.password)
+        this.props.history.push("/")
 
 
     }
@@ -26,12 +36,14 @@ class Login extends Component {
     render() {
         return (
             <div className="Container">
-                <input type="email" placeholder="email" name="email"/>
+                <input type="email" placeholder="email" name="email" onChange={this.handleEmailChange.bind(this)}/>
                 <br/>
-                <input type="password" placeholder="password" name="password"/>
+                <input type="password" placeholder="password" onChange={this.handlePasswordChange.bind(this)}
+                       name="password"/>
                 <br/>
                 <button type="submit" onClick={this.handleSubmit.bind(this)}>Submit</button>
             </div>
+
         );
     }
 }
